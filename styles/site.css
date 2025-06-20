@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    /* background: #222; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#game {
+    width: 400px;
+    height: 600px;
+    background: #91d276;
+    position: relative;
+    overflow: hidden;
+}
+
+#player {
+    width: 38px;
+    height: 38px;
+    margin: 1px;
+    background: #5e96e4;
+    position: absolute;
+    bottom: 0;
+    left: 180px;
+    z-index: 10;
+    transition: top 0.10s ease-out;
+}
+
+.car {
+    width: 80px;
+    height: 40px;
+    background: #eb4d4b;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+
+.lane {
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    background: #cbd0d3;
+    z-index: 1;
+    transition: top 0.10s ease-out;
+}
