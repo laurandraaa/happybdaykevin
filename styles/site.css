@@ -6,13 +6,16 @@
       margin: 0;
       font-family: sans-serif;
       background-color: #cce7ff;
+      height: 100vh;
       overflow: hidden;
     }
 
     #game {
       position: relative;
-      width: 100vw;
-      height: 100vh;
+      margin: auto;
+      top: 25vh;
+      width: 50vw;
+      height: 50vh;
       background: linear-gradient(#cce7ff, #87cefa);
       overflow: hidden;
     }
@@ -21,9 +24,9 @@
       position: absolute;
       bottom: 20px;
       left: 50px;
-      width: 100px;
+      /* width: 100px; */
       height: 100px;
-      border-radius: 10px;
+      /* border-radius: 10px; */
     }
 
     .obstacle {

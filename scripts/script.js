@@ -11,7 +11,7 @@ const game = document.getElementById("game");
       isJumping = true;
 
       let jumpHeight = 0;
-      const maxJumpHeight = 300;
+      const maxJumpHeight = 230;
       const jumpSpeed = 10;
       const jumpInterval = setInterval(() => {
         if (jumpHeight >= maxJumpHeight) {
