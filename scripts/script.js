@@ -1,66 +1,67 @@
 const game = document.getElementById("game");
-    const player = document.getElementById("player");
-    const gameOverText = document.getElementById("gameOver");
+const player = document.getElementById("player");
+const gameOverText = document.getElementById("gameOver");
+const scoreText = document.getElementById("score");
 
-    let isJumping = false;
-    let isGameOver = false;
+let score = 0;
+let scoreInterval;
+let isJumping = false;
+let isGameOver = false;
 
-    // Player jump control
-    function jump() {
-      if (isJumping || isGameOver) return;
-      isJumping = true;
+function jump() {
+    if (isJumping || isGameOver) return;
+    isJumping = true;
 
-      let jumpHeight = 0;
-      const maxJumpHeight = 230;
-      const jumpSpeed = 10;
-      const jumpInterval = setInterval(() => {
+    let jumpHeight = 0;
+    const maxJumpHeight = 220;
+    const jumpSpeed = 10;
+    const jumpInterval = setInterval(() => {
         if (jumpHeight >= maxJumpHeight) {
-          clearInterval(jumpInterval);
-          fall();
+            clearInterval(jumpInterval);
+            fall();
         } else {
-          jumpHeight += jumpSpeed;
-          player.style.bottom = 20 + jumpHeight + "px";
+            jumpHeight += jumpSpeed;
+            player.style.bottom = 20 + jumpHeight + "px";
         }
-      }, 20);
+    }, 20);
 
-      function fall() {
+    function fall() {
         const fallInterval = setInterval(() => {
-          jumpHeight -= jumpSpeed;
-          if (jumpHeight <= 0) {
+        jumpHeight -= jumpSpeed;
+        if (jumpHeight <= 0) {
             jumpHeight = 0;
             player.style.bottom = "20px";
             isJumping = false;
             clearInterval(fallInterval);
-          } else {
+        } else {
             player.style.bottom = 20 + jumpHeight + "px";
-          }
-        }, 20);
-      }
+        }}, 20);
     }
+}
 
-    // Create and move obstacles
-    function createObstacle() {
-      if (isGameOver) return;
+function createObstacle() {
+    if (isGameOver) return;
 
-      const obstacle = document.createElement("div");
-      obstacle.classList.add("obstacle");
-      obstacle.style.left = game.offsetWidth + "px";
-      game.appendChild(obstacle);
+    const obstacle = document.createElement("div");
+    let hasScored = false;
 
-      let obstacleLeft = game.offsetWidth;
+    obstacle.classList.add("obstacle");
+    obstacle.style.left = game.offsetWidth + "px";
+    game.appendChild(obstacle);
 
-      const obstacleSpeed = 7; // px per frame (~20ms)
-      const moveObstacle = setInterval(() => {
+    let obstacleLeft = game.offsetWidth;
+
+    const obstacleSpeed = 7;
+    const moveObstacle = setInterval(() => {
         if (isGameOver) {
-          clearInterval(moveObstacle);
-          obstacle.remove();
-          return;
+            clearInterval(moveObstacle);
+            obstacle.remove();
+            return;
         }
 
         obstacleLeft -= obstacleSpeed;
         obstacle.style.left = obstacleLeft + "px";
 
-        // Collision detection using bounding boxes
         const playerRect = player.getBoundingClientRect();
         const obstacleRect = obstacle.getBoundingClientRect();
 
@@ -75,38 +76,44 @@ const game = document.getElementById("game");
           clearInterval(moveObstacle);
         }
 
-        // Remove obstacle when offscreen left
-        if (obstacleLeft + obstacle.offsetWidth < 0) {
-          clearInterval(moveObstacle);
-          obstacle.remove();
+    if (!hasScored && obstacleLeft + obstacle.offsetWidth < player.offsetLeft) {
+        score++;
+        scoreText.textContent = "Score: " + score;
+        hasScored = true;
+
+       if (obstacleLeft + obstacle.offsetWidth < 0) {
+        clearInterval(moveObstacle);
+        obstacle.remove();
         }
-      }, 20);
+    }}, 20);
 
-      // Random delay between next obstacles
-      const nextObstacleDelay = Math.random() * 2000 + 1000;
-      setTimeout(createObstacle, nextObstacleDelay);
-    }
+    const nextObstacleDelay = Math.random() * 2000 + 1000;
+    setTimeout(createObstacle, nextObstacleDelay);
+}
 
-    function endGame() {
-      isGameOver = true;
-      gameOverText.style.display = "block";
-    }
+function endGame() {
+  isGameOver = true;
+  clearInterval(scoreInterval);
+  gameOverText.style.display = "block";
+}
 
-    function resetGame() {
-      isGameOver = false;
-      gameOverText.style.display = "none";
-      player.style.bottom = "20px";
-      document.querySelectorAll(".obstacle").forEach((o) => o.remove());
-      createObstacle();
-    }
+function resetGame() {
+    isGameOver = false;
+    gameOverText.style.display = "none";
+    player.style.bottom = "20px";
+    document.querySelectorAll(".obstacle").forEach((o) => o.remove());
+    score = 0;
+    scoreText.textContent = "Score: 0";
+    createObstacle();
+}
 
-    document.addEventListener("keydown", (e) => {
-      if (e.code === "Space") {
-        e.preventDefault(); // Prevent page scrolling
+document.addEventListener("keydown", (e) => {
+    if (e.code === "Space") {
+        e.preventDefault();
         jump();
       } else if (e.code === "KeyR" && isGameOver) {
         resetGame();
       }
     });
 
-    createObstacle();
+createObstacle();
