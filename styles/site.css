@@ -1,72 +1,100 @@
 * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background-color: #cce7ff;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    #game {
-      position: relative;
-      margin: auto;
-      top: 25vh;
-      width: 50vw;
-      height: 50vh;
-      background: linear-gradient(#cce7ff, #87cefa);
-      overflow: hidden;
-    }
-
-    .player {
-      position: absolute;
-      bottom: 20px;
-      left: 50px;
-      /* width: 100px; */
-      height: 100px;
-      /* border-radius: 10px; */
-    }
-
-    .obstacle {
-      position: absolute;
-      bottom: 20px;
-      width: 40px;
-      height: 100px;
-      background-color: #e74c3c;
-      animation: moveObstacle 3s linear infinite;
-    }
-
-    @keyframes moveObstacle {
-      from { right: -30px; }
-      to { right: 100vw; }
-    }
-
-    .ground {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 20px;
-      background: #2ecc71;
-    }
-
-.score {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 1.5em;
-  color: #fff;
-  z-index: 10;
+    box-sizing: border-box;
 }
 
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #cce7ff;
+    height: 100vh;
+    overflow: hidden;
+}
 
-    .game-over {
-      position: absolute;
-      top: 40%;
-      width: 100%;
-      text-align: center;
-      font-size: 2em;
-      color: #fff;
-      display: none;
-    }
+.character-select {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 10vh;
+}
+
+.character {
+    cursor: pointer;
+    text-align: center;
+}
+
+.character img {
+    width: 100px;
+    border: 3px solid transparent;
+    border-radius: 10px;
+    transition: border 0.2s;
+    image-rendering: pixelated;
+}
+
+.character img:hover {
+    border-color: #3498db;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 25vh;
+    font-family: sans-serif;
+}
+
+#game {
+    position: relative;
+    margin: auto;
+    top: 25vh;
+    width: 50vw;
+    height: 50vh;
+    background: linear-gradient(#cce7ff, #87cefa);
+    overflow: hidden;
+}
+
+.player {
+    position: absolute;
+    bottom: 20px;
+    left: 50px;
+    height: 100px;
+    image-rendering: pixelated;
+}
+
+.obstacle {
+    position: absolute;
+    bottom: 20px;
+    width: 40px;
+    height: 100px;
+    background-color: #e74c3c;
+    animation: moveObstacle 3s linear infinite;
+}
+
+@keyframes moveObstacle {
+    from { right: -30px; }
+    to { right: 100vw; }
+}
+
+.ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+    background: #2ecc71;
+}
+
+.score {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1.5em;
+    color: #fff;
+    z-index: 10;
+}
+
+.game-over {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+    color: #fff;
+    display: none;
+}

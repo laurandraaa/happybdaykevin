@@ -8,9 +8,27 @@ let scoreInterval;
 let isJumping = false;
 let isGameOver = false;
 
+let walkFrame = 0;
+let walkInterval;
+
+function startWalkAnimation() {
+  walkInterval = setInterval(() => {
+    if (!isJumping && !isGameOver) {
+      walkFrame = (walkFrame + 1) % 2;
+      player.src = walkFrame === 0 ? "images/kevin-walking1.png" : "images/kevin-walking2.png";
+    }
+  }, 150);
+}
+
+function stopWalkAnimation() {
+  clearInterval(walkInterval);
+}
+
 function jump() {
     if (isJumping || isGameOver) return;
     isJumping = true;
+    stopWalkAnimation();
+    player.src = "images/kevin-jumping.png";
 
     let jumpHeight = 0;
     const maxJumpHeight = 220;
@@ -27,15 +45,18 @@ function jump() {
 
     function fall() {
         const fallInterval = setInterval(() => {
-        jumpHeight -= jumpSpeed;
-        if (jumpHeight <= 0) {
-            jumpHeight = 0;
-            player.style.bottom = "20px";
-            isJumping = false;
-            clearInterval(fallInterval);
-        } else {
-            player.style.bottom = 20 + jumpHeight + "px";
-        }}, 20);
+            jumpHeight -= jumpSpeed;
+            if (jumpHeight <= 0) {
+                jumpHeight = 0;
+                player.style.bottom = "20px";
+                isJumping = false;
+                clearInterval(fallInterval);
+                player.src = "images/kevin-walking1.png";
+                startWalkAnimation();
+            } else {
+                player.style.bottom = 20 + jumpHeight + "px";
+            }
+        }, 20);
     }
 }
 
@@ -78,7 +99,7 @@ function createObstacle() {
 
     if (!hasScored && obstacleLeft + obstacle.offsetWidth < player.offsetLeft) {
         score++;
-        scoreText.textContent = "Score: " + score;
+        scoreText.textContent = "score: " + score;
         hasScored = true;
 
        if (obstacleLeft + obstacle.offsetWidth < 0) {
@@ -95,6 +116,7 @@ function endGame() {
   isGameOver = true;
   clearInterval(scoreInterval);
   gameOverText.style.display = "block";
+  stopWalkAnimation();
 }
 
 function resetGame() {
@@ -102,8 +124,10 @@ function resetGame() {
     gameOverText.style.display = "none";
     player.style.bottom = "20px";
     document.querySelectorAll(".obstacle").forEach((o) => o.remove());
+    player.src = "images/kevin-right-standing.png";
     score = 0;
     scoreText.textContent = "Score: 0";
+    startWalkAnimation();
     createObstacle();
 }
 
@@ -117,3 +141,4 @@ document.addEventListener("keydown", (e) => {
     });
 
 createObstacle();
+startWalkAnimation();
