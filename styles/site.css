@@ -34,6 +34,11 @@ body {
     border-color: #3498db;
 }
 
+h3 {
+    text-align: center;
+    margin-top: 25vh;
+}
+
 h1 {
     text-align: center;
     margin-top: 25vh;
