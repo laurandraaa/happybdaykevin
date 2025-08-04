@@ -3,6 +3,8 @@ const player = document.getElementById("player");
 const gameOverText = document.getElementById("gameOver");
 const scoreText = document.getElementById("score");
 
+const savedCharacter = localStorage.getItem("selectedCharacter") || "images/kevin.png";
+
 let score = 0;
 let scoreInterval;
 let isJumping = false;
@@ -15,9 +17,9 @@ function startWalkAnimation() {
   walkInterval = setInterval(() => {
     if (!isJumping && !isGameOver) {
       walkFrame = (walkFrame + 1) % 2;
-      player.src = walkFrame === 0 ? "images/kevin-walking1.png" : "images/kevin-walking2.png";
+      player.src = walkFrame === 0 ? "images/" + savedCharacter + "-walking1.png" : "images/" + savedCharacter + "-walking2.png";
     }
-  }, 150);
+  }, 175);
 }
 
 function stopWalkAnimation() {
@@ -28,7 +30,7 @@ function jump() {
     if (isJumping || isGameOver) return;
     isJumping = true;
     stopWalkAnimation();
-    player.src = "images/kevin-jumping.png";
+    player.src = "images/" + savedCharacter + "-jumping.png";
 
     let jumpHeight = 0;
     const maxJumpHeight = 220;
@@ -51,7 +53,7 @@ function jump() {
                 player.style.bottom = "20px";
                 isJumping = false;
                 clearInterval(fallInterval);
-                player.src = "images/kevin-walking1.png";
+                player.src = "images/" + savedCharacter + "-walking1.png";
                 startWalkAnimation();
             } else {
                 player.style.bottom = 20 + jumpHeight + "px";
@@ -117,6 +119,7 @@ function endGame() {
   clearInterval(scoreInterval);
   gameOverText.style.display = "block";
   stopWalkAnimation();
+  player.src = "images/" + savedCharacter + ".png"
 }
 
 function resetGame() {
@@ -124,11 +127,10 @@ function resetGame() {
     gameOverText.style.display = "none";
     player.style.bottom = "20px";
     document.querySelectorAll(".obstacle").forEach((o) => o.remove());
-    player.src = "images/kevin-right-standing.png";
     score = 0;
-    scoreText.textContent = "Score: 0";
-    startWalkAnimation();
+    scoreText.textContent = "score: 0";
     createObstacle();
+    startWalkAnimation();
 }
 
 document.addEventListener("keydown", (e) => {

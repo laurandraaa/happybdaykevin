@@ -23,7 +23,7 @@ body {
 }
 
 .character img {
-    width: 100px;
+    height: 150px;
     border: 3px solid transparent;
     border-radius: 10px;
     transition: border 0.2s;

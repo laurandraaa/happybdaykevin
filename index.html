@@ -9,12 +9,12 @@
 <body>
   <h1>choose your character</h1>
   <div class="character-select">
-    <div class="character" onclick="selectCharacter('kevin-head.png')">
-      <img src="images/kevin-standing.png" alt="kevin">
+    <div class="character" onclick="selectCharacter('kevin')">
+      <img src="images/kevin.png" alt="kevin">
       <div>kevin j won</div>
     </div>
-    <div class="character" onclick="selectCharacter('kevin-hat.png')">
-      <img src="images/kevin-hat.png" alt="Kevin with Hat">
+    <div class="character" onclick="selectCharacter('ted2')">
+      <img src="images/ted2.png" alt="Kevin with Hat">
       <div>mr uncle ted2</div>
     </div>
     <div class="character" onclick="selectCharacter('kevin-shades.png')">
@@ -24,8 +24,8 @@
   </div>
 
   <script>
-    function selectCharacter(filename) {
-      localStorage.setItem("selectedCharacter", filename);
+    function selectCharacter(charname) {
+      localStorage.setItem("selectedCharacter", charname);
       window.location.href = "game.html";
     }
   </script>

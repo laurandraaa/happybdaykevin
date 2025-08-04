@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>kevins cardio time</title>
-  <link rel="stylesheet" type="text/css" href="styles/site.css">
+    <meta charset="UTF-8">
+    <title>kevins cardio time</title>
+    <link rel="stylesheet" type="text/css" href="styles/site.css">
+
 
 </head>
 <body>
   <div id="game">
-    <img src="images/kevin-right-standing.png" class="player" id="player" alt="">
+    <img class="player" id="player" alt="Player Character">
     <div class="ground"></div>
     <div class="score" id="score">score: 0</div>
 
     <div class="game-over" id="gameOver">game over<br><small>press R to restart</small></div>
   </div>
 
-  <script src="scripts/script.js">
-
-  </script>
+  <script src="scripts/script.js"></script>
+  <script>
+        const savedCharacter = localStorage.getItem("selectedCharacter") || "kevin-head.png";
+        document.getElementById("player").src = "images/" + savedCharacter + ".png";
+    </script>
 </body>
 </html>
