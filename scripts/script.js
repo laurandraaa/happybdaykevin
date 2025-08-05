@@ -130,7 +130,6 @@ function resetGame() {
     score = 0;
     scoreText.textContent = "score: 0";
     createObstacle();
-    startWalkAnimation();
 }
 
 document.addEventListener("keydown", (e) => {
