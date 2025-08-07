@@ -13,7 +13,7 @@ body {
 .character-select {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 10px;
     margin-top: 10vh;
 }
 
@@ -23,20 +23,28 @@ body {
 }
 
 .character img {
-    height: 150px;
-    border: 3px solid transparent;
-    border-radius: 10px;
+    height: 200px;
+    padding: 30px;
     transition: border 0.2s;
     image-rendering: pixelated;
 }
 
 .character img:hover {
-    border-color: #3498db;
+    background-image: radial-gradient(#3498db, rgb(120, 176, 213),  #c4e2fd, #cce7ff);
+}
+
+h3 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50vw;
+    text-align: center;
+    margin-top: 40vh;
+    font-weight: 500;
 }
 
 h1 {
     text-align: center;
-    margin-top: 50vh;
+    margin-top: 5vh;
     font-family: sans-serif;
 }
 
