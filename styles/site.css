@@ -34,14 +34,9 @@ body {
     border-color: #3498db;
 }
 
-h3 {
-    text-align: center;
-    margin-top: 25vh;
-}
-
 h1 {
     text-align: center;
-    margin-top: 25vh;
+    margin-top: 50vh;
     font-family: sans-serif;
 }
 
@@ -61,6 +56,7 @@ h1 {
     left: 50px;
     height: 100px;
     image-rendering: pixelated;
+    z-index: 3;
 }
 
 .obstacle {
@@ -68,8 +64,9 @@ h1 {
     bottom: 20px;
     width: 40px;
     height: 100px;
-    background-color: #e74c3c;
+    background-color: #8f423a;
     animation: moveObstacle 3s linear infinite;
+    z-index: 3;
 }
 
 @keyframes moveObstacle {
@@ -82,7 +79,8 @@ h1 {
     bottom: 0;
     width: 100%;
     height: 20px;
-    background: #2ecc71;
+    background: #53ca71;
+    z-index: 3;
 }
 
 .score {
@@ -102,4 +100,25 @@ h1 {
     font-size: 2em;
     color: #fff;
     display: none;
+}
+
+.balloon {
+  position: absolute;
+  bottom: -500px;
+  width: 80px;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.7;
+}
+
+@keyframes floatSway {
+  0%   { transform: translateX(0) scale(var(--scale, 1)); }
+  50%  { transform: translateX(30px) scale(var(--scale, 1)); }
+  100% { transform: translateX(0) scale(var(--scale, 1)); }
+}
+
+.balloon {
+  animation: floatSway 3s ease-in-out infinite;
 }
