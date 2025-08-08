@@ -21,7 +21,7 @@ function createBalloon() {
 
   page.appendChild(balloon);
 
-  let bottom = -200;
+  let bottom = -150;
   const floatSpeed = 1 + Math.random() * 1.5;
   const floatInterval = setInterval(() => {
     if (bottom > page.offsetHeight + 100) {

@@ -14,7 +14,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-top: 5vh;
+    margin-top: 4vh;
 }
 
 .character {
@@ -34,7 +34,7 @@ body {
 }
 
 h4 {
-    padding-top: 12%;
+    padding-top: 11%;
     margin-left: auto;
     margin-right: auto;
     width: 40vw;
@@ -112,7 +112,7 @@ h1 {
 
 .balloon {
   position: absolute;
-  bottom: -500px;
+  bottom: -150px;
   width: 80px;
   height: auto;
   z-index: 1;
