@@ -180,7 +180,9 @@ document.addEventListener("keydown", (e) => {
       }
     });
 
+createBalloon();
+createBalloon();
+createBalloon();
+createBalloon();
 createObstacle();
 startWalkAnimation();
-createBalloon();
-createBalloon();
