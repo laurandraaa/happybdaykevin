@@ -14,7 +14,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-top: 10vh;
+    margin-top: 5vh;
 }
 
 .character {
@@ -33,18 +33,18 @@ body {
     background-image: radial-gradient(#3498db, rgb(120, 176, 213),  #c4e2fd, #cce7ff);
 }
 
-h3 {
+h4 {
     margin-left: auto;
     margin-right: auto;
-    width: 50vw;
+    width: 40vw;
     text-align: center;
-    margin-top: 40vh;
-    font-weight: 500;
+    margin-top: 50vh;
+    font-weight: 400;
 }
 
 h1 {
     text-align: center;
-    margin-top: 5vh;
+    margin-top: 1vh;
     font-family: sans-serif;
 }
 
