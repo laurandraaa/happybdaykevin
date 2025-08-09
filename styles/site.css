@@ -6,8 +6,12 @@ body {
     margin: 0;
     font-family: sans-serif;
     background-color: #cce7ff;
-    height: 100vh;
     overflow: hidden;
+}
+
+.page-container {
+    height: 100vh;
+    overflow-y: hidden;
 }
 
 .character-select {
