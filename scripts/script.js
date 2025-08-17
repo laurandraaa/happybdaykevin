@@ -237,7 +237,21 @@ document.addEventListener("keydown", (e) => {
       } else if (e.code === "KeyR" && isGameOver) {
         resetGame();
       }
-    });
+});
+
+game.addEventListener("touchstart", (e) => {
+    e.preventDefault(); // prevent scrolling
+    if (!isGameOver) {
+        jump();
+    }
+});
+
+gameOverText.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    if (isGameOver) {
+        resetGame();
+    }
+});
 
 createBalloon();
 createBalloon();

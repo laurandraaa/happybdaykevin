@@ -133,3 +133,12 @@ h1 {
 .balloon {
   animation: floatSway 3s ease-in-out infinite;
 }
+
+@media (max-width: 768px) {
+    #game {
+        width: 100vw;
+        height: 100vh;
+        /* background-color: black; */
+    }
+
+}
