@@ -73,10 +73,9 @@ h1 {
 
 .obstacle {
     position: absolute;
-    bottom: 20px;
-    width: 40px;
-    height: 100px;
-    background-color: #8f423a;
+    bottom: 5px;
+    width: 57px;
+    image-rendering: pixelated;
     animation: moveObstacle 3s linear infinite;
     z-index: 3;
 }

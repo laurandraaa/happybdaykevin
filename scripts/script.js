@@ -5,6 +5,19 @@ const scoreText = document.getElementById("score");
 
 const savedCharacter = localStorage.getItem("selectedCharacter") || "images/kevin.png";
 
+// function monthsSinceJanuary2023() {
+//     const startDate = new Date(2023, 0); // January 2023 (month index 0)
+//     const today = new Date();
+
+//     let months = (today.getFullYear() - startDate.getFullYear()) * 12;
+//     months += today.getMonth() - startDate.getMonth();
+
+//     return months;
+// }
+
+// const winningScore = monthsSinceJanuary2023();
+
+let obstacleTimeout;
 let score = 0;
 let scoreInterval;
 let isJumping = false;
@@ -104,8 +117,15 @@ function jump() {
 function createObstacle() {
     if (isGameOver) return;
 
-    const obstacle = document.createElement("div");
+    const obstacle = document.createElement("img");
     let hasScored = false;
+
+    const obstacleImages = [
+        "obstacle1.png",
+        "obstacle2.png"
+    ];
+    const randomImage = obstacleImages[Math.floor(Math.random() * obstacleImages.length)];
+    obstacle.src = "images/" + randomImage;
 
     obstacle.classList.add("obstacle");
     obstacle.style.left = game.offsetWidth + "px";
@@ -143,13 +163,23 @@ function createObstacle() {
         scoreText.textContent = "score: " + score;
         hasScored = true;
 
+        if (score >= 24) {
+          winGame();
+          clearInterval(moveObstacle);
+          obstacle.remove();
+          return;
+        }
+
        if (obstacleLeft + obstacle.offsetWidth < 0) {
         clearInterval(moveObstacle);
         obstacle.remove();
         }
     }}, 20);
 
-    const nextObstacleDelay = Math.random() * 2000 + 1000;
+    const minDelay = 1000;
+    const maxDelay = 3000;
+    const nextObstacleDelay = Math.random() * (maxDelay - minDelay) + minDelay;
+
     setTimeout(createObstacle, nextObstacleDelay);
 }
 
@@ -161,13 +191,32 @@ function endGame() {
   player.src = "images/" + savedCharacter + ".png"
 }
 
+function winGame() {
+  isGameOver = true;
+  clearInterval(scoreInterval);
+  // gameOverText.textContent = "happy 24!! you've successfully jumped over a chair for every month the bars have been inside you!!!🎉";
+  gameOverText.textContent = "you win!!!!! wahoooooo happy 24!!!! my sweet handsome boy who is scared of chairs!!!!!! teehee🎉 (press R to play again)"
+  gameOverText.style.display = "block";
+  gameOverText.style.fontSize = "22px";
+  gameOverText.style.width = "100%";
+  gameOverText.style.margin = "0 auto";
+  gameOverText.style.textAlign = "center";
+  stopWalkAnimation();
+  player.src = "images/" + savedCharacter + ".png";
+}
+
 function resetGame() {
     isGameOver = false;
     gameOverText.style.display = "none";
     player.style.bottom = "20px";
-    document.querySelectorAll(".obstacle").forEach((o) => o.remove());
+
+    const allObstacles = game.querySelectorAll(".obstacle");
+    allObstacles.forEach(obstacle => obstacle.remove());
+
+    clearTimeout(obstacleTimeout);
     score = 0;
     scoreText.textContent = "score: 0";
+    console.log(allObstacles);
     createObstacle();
 }
 
