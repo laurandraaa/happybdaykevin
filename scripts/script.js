@@ -74,6 +74,15 @@ function startWalkAnimation() {
   }, 175);
 }
 
+function startJumpAnimation() {
+  walkInterval = setInterval(() => {
+    if (isGameOver) {
+      walkFrame = (walkFrame + 1) % 2;
+      player.src = walkFrame === 0 ? "images/" + savedCharacter + ".png" : "images/" + savedCharacter + "-jumping.png";
+    }
+  }, 175);
+}
+
 function stopWalkAnimation() {
   clearInterval(walkInterval);
 }
@@ -202,6 +211,7 @@ function winGame() {
   gameOverText.style.margin = "0 auto";
   gameOverText.style.textAlign = "center";
   stopWalkAnimation();
+  startJumpAnimation();
   player.src = "images/" + savedCharacter + ".png";
 }
 
